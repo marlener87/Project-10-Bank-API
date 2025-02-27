@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+</head>
+<body>
+
+
+    <script>
+    
+        const token = localStorage.getItem('token')
+        if(token){
+
+            // Etape n°2 - On utilise le token pour récupérer les informations de l'utilisateur
+            fetch("http://localhost:3001/api/v1/user/profile", {
+                method : "POST",
+                headers: {
+                  'Accept': 'application/json',
+                  'Authorization': `Bearer ${token}` 
+                },
+            })
+          .then(response => response.json())
+          .then(response => {
+            const data = response.body
+            console.log(data.firstName)
+            console.log(data.lastName)
+          })
+
+
+          const firstName = "Roger";
+          const lastName = "MooreJunior";
+
+          // Etape n°3 - On utilise le token pour modifier le prénom
+           fetch("http://localhost:3001/api/v1/user/profile", {
+              method : "PUT",
+              body : JSON.stringify({firstName, lastName}),
+              headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}` ,
+                'Content-Type': 'application/json'
+              },
+            })
+          .then(response => console.log(response))
+
+        } else {
+
+
+
+        // Etape n°1 : Connexion pour récupérer le token 
+        const email = "tony@stark.com";
+        const password = "password123";
+
+        fetch("http://localhost:3001/api/v1/user/login", {
+          method : "POST",
+          body : JSON.stringify({email, password}),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json' // Important à ne pas oublier
+           },
+        })
+          .then(response => response.json())
+          .then(data => {
+            const token = data.body.token
+
+            localStorage.setItem('token', token); // A eviter, c'est pour l'exemple (mieux utiliser les cookies)
+          
+            // Etape n°2 - On utilise le token pour récupérer les informations de l'utilisateur
+            fetch("http://localhost:3001/api/v1/user/profile", {
+                method : "POST",
+                headers: {
+                  'Accept': 'application/json',
+                  'Authorization': `Bearer ${token}` 
+                },
+            })
+          .then(response => response.json())
+          .then(response => {
+            const data = response.body
+            console.log(data.firstName)
+            console.log(data.lastName)
+          })
+  
+          })
+        }
+    
+
+
+    // 1) Install React + design des pages (bien décomposer en components réutilisables)
+    // 2) Install Server + mongod DB => OK
+    // 3) Récupérer les données du formulaires de connexion en React
+    // 4) Utiliser ces données pour faire la requete fetch/axios => récupérer un token
+
+    // 5) Faire le cours sur redux
+    // 6) Faire un petit exemple de fonctionnement de redux (exemple du counter)
+
+    // 7) Sauvegarder et utiliser le token avec redux
+    // 8) Partie modification du profil 
+    // 9) rendre innaccessible la page de profil si non connecté + finitions
+
+    // 10) documentation swagger
+
+
+    </script>
+</body>
+</html>

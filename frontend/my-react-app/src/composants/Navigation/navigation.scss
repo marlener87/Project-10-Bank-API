@@ -1,0 +1,34 @@
+.mainNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+
+    a {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    .logoNav {
+        display: flex;
+        align-items: center;
+
+        .imageNav {
+            max-width: 100%;
+            width: 200px;
+        }
+    }
+
+    .itemNav {
+        text-decoration: none;
+        margin-right: 0.5rem;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        .icon {
+            margin-right: 0.5rem;
+        }
+    }
+}
