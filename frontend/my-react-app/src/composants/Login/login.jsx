@@ -13,7 +13,9 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    // Sert à envoyer des actions au store Redux afin de modifier l'état global de l'application
     const dispatch = useDispatch();
+    // Sert à gérer la navigation entre différentes pages dans une application React
     const navigate = useNavigate();
 
     // Fonction qui s'exécute lors de la soumission du formulaire
@@ -40,7 +42,7 @@ const Login = () => {
 
                 // Stocker le token dans Redux et localStorage
                 dispatch(setToken(token));
-                //localStorage.setItem('token', token); // Stocker le token d'authentification et le prénom dans le localStorage
+                sessionStorage.setItem('token', token); // Stocker le token d'authentification et le prénom dans le sessionStorage
 
                 const userResponse = await axios.post(
                     'http://localhost:3001/api/v1/user/profile', 

@@ -1,11 +1,14 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CardProfil from "../../composants/CardProfil/cardProfil";
 import Footer from "../../composants/Footer/footer";
 import Navigation from "../../composants/Navigation/navigation";
 import './profil.scss';
+import { openPopup } from "../../redux/popupSlice";
+import PopUp from "../../composants/PopUp/popup";
 
 const Profil = () => {
     const user = useSelector(state => state.auth.user);
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -21,7 +24,8 @@ const Profil = () => {
                     <h1 className="titleProfil">Welcome back!</h1>
                 )}
                 
-                <button className="editButtonProfil">Edit Name</button>
+                <button className="editButtonProfil" onClick={() => dispatch(openPopup())}>Edit Name</button>
+                <PopUp />
             </div>
 
             <CardProfil titleCardProfil={'Argent Bank Checking (x8349)'} risingProfil={'$2,082.79'} descriptionProfil={'Available Balance'} />
