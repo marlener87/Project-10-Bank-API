@@ -2,7 +2,7 @@ import { useState } from 'react';
 // Importation de la bibliothèque Axios pour les requêtes HTTP
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import './connexion.scss';
+import './login.scss';
 import { useDispatch } from 'react-redux';
 import { setToken, setUser } from '../../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
@@ -42,7 +42,7 @@ const Login = () => {
 
                 // Stocker le token dans Redux et localStorage
                 dispatch(setToken(token));
-                sessionStorage.setItem('token', token); // Stocker le token d'authentification et le prénom dans le sessionStorage
+                sessionStorage.setItem('token', token); // Stocker le token d'authentification dans le sessionStorage
 
                 const userResponse = await axios.post(
                     'http://localhost:3001/api/v1/user/profile', 
@@ -59,7 +59,7 @@ const Login = () => {
                 setTimeout(() => {
                     //window.location.href = '/profil';
                     navigate('/profil');
-                }, 1000);
+                }, 500);
             }
         } catch (error) {
             if (error.response) {

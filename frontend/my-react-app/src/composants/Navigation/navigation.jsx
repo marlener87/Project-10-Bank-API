@@ -35,13 +35,18 @@ const Navigation = () => {
 
             <div>
                 {user.firstName ? (
-                    // Si l'utilisateur est connecté, afficher son prénom et 'SignOut'
-                    <Link to={'/'} className='itemNav' onClick={handleLogout}>
-                        <FontAwesomeIcon icon="fa-solid fa-circle-user" className="icon" />
-                        {user.firstName} {/* Affiche le prénom */}
-                        <FontAwesomeIcon icon="fa-solid fa-right-from-bracket" className="icon" />
-                        Sign Out
-                    </Link>    
+                    <>
+                        <Link to={'/profil'} className='itemNav'>
+                            <FontAwesomeIcon icon="fa-solid fa-circle-user" className="icon" />
+                            {user.firstName} {/* Affiche le prénom */}
+                        </Link>
+
+                        {/* Si l'utilisateur est connecté, afficher son prénom et 'SignOut'*/}
+                        <Link to={'/'} className='itemNav' onClick={handleLogout}>
+                            <FontAwesomeIcon icon="fa-solid fa-right-from-bracket" className="icon" />
+                            Sign Out
+                        </Link> 
+                    </>   
                 ) : (
                     // Sinon, afficher 'Sign In'
                     <Link to="/login" className="itemNav">

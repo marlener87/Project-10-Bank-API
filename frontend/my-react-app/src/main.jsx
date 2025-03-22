@@ -26,20 +26,3 @@ createRoot(document.getElementById('root')).render(
         </Provider>    
     </StrictMode>,
 )
-
-
-
-/*
-{
-  headers: {
-     Authorization: "Bearer " + token,
-  },
-}
-
-
-
-// datas
-  const prenom = response.data.body.firstName;
-  const nom = response.data.body.lastName;
-
-  */
