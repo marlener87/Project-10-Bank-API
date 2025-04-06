@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // Importation de la bibliothèque Axios pour les requêtes HTTP
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +17,14 @@ const Login = () => {
     const dispatch = useDispatch();
     // Sert à gérer la navigation entre différentes pages dans une application React
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('token');
+        if (token) {
+            navigate('/profil'); // Redirige vers le dashboard si déjà connecté
+        }
+    }, [navigate]);
+
 
     // Fonction qui s'exécute lors de la soumission du formulaire
     const handleSubmit = async (e) => {

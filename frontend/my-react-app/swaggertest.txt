@@ -1,0 +1,128 @@
+
+
+
+
+
+
+
+{
+    "date": "string",
+    "description":"string",
+    "ammount": "number",
+    "balance":"number",
+    "transactionType":"string",
+    "category":"string",
+    "note":"string"
+} -> une seule transaction ( getTransaction et partch )
+
+[
+    {
+        "date": "string",
+        "description":"string",
+        "ammount": "number",
+        "balance":"number",
+        "transactionType":"string",
+        "category":"string",
+        "note":"string"
+    } 
+]
+
+
+
+
+
+
+PATCH
+{   "category": "string",
+    "notes": "string"
+  }
+
+{
+    "date": "string",
+    "description":"string",
+    "ammount": "number",
+    "balance":"number",
+    "transactionType":"string",
+    "category":"string",
+    "note":"string"
+} 
+
+
+
+
+
+/transactions/transaction/{idTransaction}:
+    get:
+      security: 
+        - Bearer: []
+      tags: 
+        - Transactions Module
+      summary: Transaction API
+      description: API for fetching specific user transaction on accountId
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: id
+          description: Unique identifier of the transaction
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction details retrieved successfully
+          schema:
+            $ref: '#/definitions/TransactionDetailsResponse'
+        '400':
+          descirption: Invalid Fields
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error  
+
+
+
+
+                  - in: body
+          description: Fields to add, modify or remove (use null to delete a field)
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionPatch'
+
+
+TransactionDetailsResponse:
+    type: objet
+    properties: 
+      status:
+        type: integer
+      message:
+        type: string
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+          date:
+            type: string
+          description:
+            type: string
+          amount:
+            type: integer
+          balance:
+            type: integer
+          type:
+            type: string
+          category:
+            type: string
+          notes:
+            type: string 
+
+
+
+
+
+  
