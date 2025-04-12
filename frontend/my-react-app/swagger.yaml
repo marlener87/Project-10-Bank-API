@@ -122,14 +122,44 @@ paths:
           description: Internal Server Error
 
 
-  /transactions/{idUser}/{idAccount}:
+  /accounts:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Account Module
+      summary: Account API
+      description: API to get account 
+      parameters:
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction retrieved successfully
+          schema:
+            $ref: "#/definitions/TransactionsResponse"
+        '400':
+          description: Invalid Fields
+        '401':
+          description: Invalid token
+        '404':
+          description: Invalid idUser or idAccount
+        '500':
+          description: Internal Server Error
+
+  /transactions/account/{idAccount}:
     get:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Transaction API
-      description: API to get the list of transactions for a specific account and a specific user
+      summary: List of Transaction for the current month API
+      description: API to get the list of transactions for a specific account and current month
       parameters:
         - in: header
           type: string
@@ -138,58 +168,40 @@ paths:
           required: true
         - in: path
           type: string
-          name: idUser
-          description: The user id
-          required: true
-        - in: path
-          type: string
           name: idAccount
           description: The account id
           required: true
-        - in: query
-          type: string
-          name: month
-          description: selected month
-          required: false
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: Transaction retrieved successfully
           schema:
             $ref: "#/definitions/TransactionsResponse"
-        "400":
+        '400':
           description: Invalid Fields
+        '401':
+          description: Invalid token
         '404':
           description: Invalid idUser or idAccount
-        "500":
+        '500':
           description: Internal Server Error
 
           
-  /transactions/{idUser}/{idAccount}/{idTransaction}:
+  /transactions/{idTransaction}:
     get: 
       security: 
         - Bearer: []
       tags: 
         - Transactions Module
       summary: Get transactions for the current month
-      description: Retrieve user transactions grouped by account
+      description: Details of a transaction according to the specified id
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
           type: string
-        - in: path
-          type: string
-          name: idUser
-          description: The user id
-          required: true
-        - in: path
-          type: string
-          name: idAccount
-          description: The account id
-          required: true
         - in: path
           type: string
           name: idTransaction
@@ -204,6 +216,8 @@ paths:
             $ref: '#/definitions/Transaction'
         '400':
           description: Invalid Fields
+        '401':
+          description: Invalid token
         '404':
           description: Invalid idUser or idAccount or idTransaction
         '500':
@@ -215,23 +229,13 @@ paths:
       tags:
         - Transactions Module
       summary: Partially update a transaction (add, modify or remove fields)
-      description: Add news fields, ypdate existing fields or remove fields from a transaction
+      description: Add news fields, update existing fields or remove fields from a transaction
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
           type: string
-        - in: path
-          type: string
-          name: idUser
-          description: The user id
-          required: true
-        - in: path
-          type: string
-          name: idAccount
-          description: The account id
-          required: true
         - in: path
           type: string
           name: idTransaction
@@ -341,11 +345,9 @@ definitions:
     properties:
       id:
         type: string
-      idUser:
-        type: string
       date:
         type: string
-        pattern: "yyyy-mm-dd"
+        pattern: "date"
       amount:
         type: number
       balance:
@@ -360,7 +362,7 @@ definitions:
         type: string
 
   ModificationTransaction:
-    type: objet
+    type: object
     properties:
       category:
         type: string
