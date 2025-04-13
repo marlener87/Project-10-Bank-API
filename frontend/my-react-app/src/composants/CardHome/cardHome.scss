@@ -2,6 +2,10 @@
     flex: 1;
     padding: 2.5rem;
 
+    @media all and (max-width:1260px) {
+        padding: 1.5rem;
+    }
+
     .iconItem {
         width: 150px;
         border: 10px solid #00bc77;
