@@ -1,12 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer, { setToken, setUser } from './authSlice';  // Importer le slice du auth
+import { configureStore } from "@reduxjs/toolkit"; 
+import authReducer, { setToken, setUser } from './authSlice';  // Importer le slice du auth, gèrent l'état lié à l'authentification (login, token, utilisateur)
 import popupReducer from './popupSlice';  // Importer le slice du popup
-import axios from "axios";
+import axios from "axios"; 
 
 // Initialise Redux avec les reducers nécessaires
 const store = configureStore({
     reducer: {
-        auth: authReducer, // Gère l'authentification (token, utilisateur)
+        auth: authReducer, // gère l'authentification (token, utilisateur)
         popup: popupReducer, // gère l'affichage les popups
     }
 });
@@ -14,6 +14,7 @@ const store = configureStore({
 // Vérifier si un token est présent au démarrage et charger les infos utilisateur
 // Si un token existe dans sessionStorage, on le récupère, sinon token sera null et l'utilisateur sera considéré comme déconnecté
 const token = sessionStorage.getItem('token');
+
 if (token) {
     store.dispatch(setToken(token)); // Mettre le token dans Redux
 

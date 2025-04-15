@@ -5,10 +5,15 @@ import Navigation from "../../composants/Navigation/navigation";
 import './profil.scss';
 import { openPopup } from "../../redux/popupSlice";
 import PopUp from "../../composants/PopUp/popup";
+import { useEffect } from "react";
 
 const Profil = () => {
     const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        console.log("Données utilisateur chargées :", user);
+    }, [user]);
 
     return (
         <>

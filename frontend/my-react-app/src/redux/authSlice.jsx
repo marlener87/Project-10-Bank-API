@@ -10,15 +10,21 @@ const auth = createSlice({
             lastName: null,
             email: null
         },
-        //token: null
         token: sessionStorage.getItem('token') || localStorage.getItem('token') ||  null, // Récupérer le token au chargement
     },
 
     reducers: {
         // Met à jour l'état de l'utilisateur dans le store Redux
         setUser: (state, action) => { // 'state' représente l'état actuel du slice Redux (auth) ; 'action' contient les données envoyées lors de l'appel à 'setUser', ces données sont stockées dans 'action.payload'
-            //state.user = action.payload;
-            state.user = { ...state.user, ...action.payload }; // on crée une copie de 'state.user' pour conserver les anciennes valeurs ; ensuite on fusionne cette copie avec 'action.payload' qui contient les nouvelles données ; si 'action.payload' contient une ou plusieurs propriétés, elles remplacent celles existantes tout en gardant les autres inchangées
+
+            // On filtre les champs vides pour ne pas écraser les anciens
+            // transforme l'objet en tableau de paires clé/valeur ; garde seulement les champs non vides ; reconstruit un objet propre
+            const cleanPayload = Object.fromEntries(
+            Object.entries(action.payload).filter(([_, value]) => value !== "")
+            );
+            
+            // Fusion propre : on garde les anciennes infos, sauf celles à mettre à jour
+            state.user = { ...state.user, ...cleanPayload };
         },
         // Met à jour et stocke le token d'authentification
         setToken: (state, action) => {

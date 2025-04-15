@@ -11,7 +11,7 @@ const Navigation = () => {
 
     // Récupère l'état d'authentification depuis Redux
     const user = useSelector(state => state.auth.user); 
-    console.log(user);
+    //console.log(user);
     
     const token = useSelector(state => state.auth.token);
     console.log(token);
@@ -27,9 +27,9 @@ const Navigation = () => {
         <nav className="mainNav">
             <Link to={'/'} className="logoNav">
                 <img
-                     className="imageNav"
-                     src={logo}
-                     alt="Argent Bank Logo"
+                    className="imageNav"
+                    src={logo}
+                    alt="Argent Bank Logo"
                 />
             </Link>
 

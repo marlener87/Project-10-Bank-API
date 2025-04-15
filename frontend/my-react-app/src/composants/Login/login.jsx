@@ -38,15 +38,10 @@ const Login = () => {
                 password    // corps de le requête : password
             });
 
-            // Log la réponse complète pour voir sa structure
-            console.log('Réponse complète:', response);
-
             // Si la requête réussit (code 200 OK)
             if (response.status === 200) {
                 const data = response.data; // Récupération des données de la réponse
                 const token = data.body.token;
-                console.log('Login réussi', data);
-                console.log('Token reçu :', token); // Affichage du token dans la console
 
                 // Stocker le token dans Redux et localStorage
                 dispatch(setToken(token));
@@ -110,7 +105,6 @@ const Login = () => {
                         <input type="checkbox" id="remember-me" />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
-                    {/* <a href="./user.html" className="buttonSignIn">Sign In</a> */}
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                     <button type="submit" className="buttonSignIn">Sign In</button>
                 </form>

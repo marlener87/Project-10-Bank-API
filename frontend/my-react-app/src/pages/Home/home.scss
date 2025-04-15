@@ -6,34 +6,49 @@
     height: 400px;
     position: relative;
 
-    @media all and (max-width:1260px) {
+    @media all and (max-width:1200px) {
         height: 300px;
         background-position: 0 -50px;
     } 
 
     .contentHeader {
-        position: relative;
-        top: 2rem;
-        width: 200px;
+        //position: relative;
+        position: absolute;
+        //top: 2rem;
+        top: 5rem;
+        // width: 200px;
+        width: 350px;
+        right: 85px;
         background: white;
         padding: 2rem;
         text-align: left;
         margin: 0 auto;
 
-        @media all and (max-width:1260px) {
+        @media all and (max-width:1200px) {
             width: 250px;
+            position: relative;
+            top: 2rem;
+            right: 5px;
         }   
     }
 
     .contentHeader .subtitle {
         font-weight: bold;
-        font-size: 1rem;
-        margin: 0;      
+        font-size: 1.5rem;
+        margin: 0;   
+        
+        @media all and (max-width:1200px) {
+            font-size: 1rem;
+        } 
     }
       
     .contentHeader .text {
         margin-bottom: 0;
-        font-size: 0.9rem;
+        font-size: 1.2rem;
+
+        @media all and (max-width:1200px) {
+            font-size: 0.9rem;
+        } 
     }   
 }
  

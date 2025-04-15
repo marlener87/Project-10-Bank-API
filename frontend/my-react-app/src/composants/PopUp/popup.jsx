@@ -3,18 +3,17 @@ import './popup.scss';
 import { closePopup } from '../../redux/popupSlice';
 import { useState } from 'react';
 import { setUser } from '../../redux/authSlice';
-//import axios from 'axios';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import axios from 'axios';
 
+// Popup de modification des données
 const PopUp = () => {
     const dispatch = useDispatch();
     const firstNameInputRef = useRef(null); // Fait référence à l'input du prénom
     // useSelector : permet d'accéder à une partie du state global du store Redux dans un composant fonctionnel
     const isOpen = useSelector((state) => state.popup.isOpen);
     const user = useSelector((state) => state.auth.user); // Récupérer l'utilisateur depuis authSlice
-    //const token = useSelector((state) => state.auth.token) || sessionStorage.getItem('token');
 
     // États locaux pour le formulaire
     const [firstName, setFirstName] = useState(user.firstName || "");
@@ -22,12 +21,10 @@ const PopUp = () => {
 
     // Mettre à jour les valeurs locales lorsque la popup s'ouvre
     useEffect(() => {
-        console.log("Popup ouverte :", isOpen);
+        //console.log("Popup ouverte :", isOpen);
         // Vérifie si la popup est ouverte
         if(isOpen) {
             // Réinitialise les champs du formulaire avec les données actuelles de l'utilisateur
-            //setFirstName(user.firstName || ""); // Si firstName est undefined ou null, on met une chaîne vide
-            //setLastName(user.lastName || ""); // Si lafirstName est undefined ou null, on met une chaîne vide
             setFirstName("");  // Réinitialiser à vide
             setLastName("");   // Réinitialiser à vide
             setTimeout(() => firstNameInputRef.current?.focus(), 0); // Met le focus sur l'input
