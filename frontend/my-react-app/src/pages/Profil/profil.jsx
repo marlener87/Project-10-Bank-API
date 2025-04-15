@@ -26,7 +26,7 @@ const Profil = () => {
                         {user.firstName} {user.lastName} !
                     </h1>
                 ) : (
-                    <h1 className="titleProfil">Welcome back!</h1>
+                    <h1 className="titleProfil">Welcome back !</h1>
                 )}
                 
                 <button className="editButtonProfil" onClick={() => dispatch(openPopup())}>Edit Name</button>

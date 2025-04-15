@@ -43,12 +43,18 @@ const PopUp = () => {
         e.preventDefault();
 
         const token = sessionStorage.getItem('token');
+
+        // Utiliser les anciennes valeurs si les champs sont vides ou ne contiennent que des espaces
+        const updatedFirstName = firstName.trim() ? firstName : user.firstName;
+        const updatedLastName = lastName.trim() ? lastName : user.lastName;
         
         try {
             const response = await axios.put(
                 'http://localhost:3001/api/v1/user/profile', 
-                {"firstName": firstName,
-                "lastName": lastName},
+                {
+                    firstName: updatedFirstName,
+                    lastName: updatedLastName
+                },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             console.log(response);

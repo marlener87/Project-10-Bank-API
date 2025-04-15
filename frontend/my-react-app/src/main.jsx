@@ -9,6 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { Provider } from 'react-redux'
 import store from './redux/store.jsx'
+import PrivateRoute from './composants/privateRoute.jsx'
 
 library.add(fas);
 
@@ -16,11 +17,17 @@ createRoot(document.getElementById('root')).render(
     <StrictMode>
         <Provider store={store}>
             <BrowserRouter>
-                <Routes>
-                    
+                <Routes>     
                     <Route path='/' element={<Home />}></Route>
                     <Route path='/login' element={<Connexion />}></Route>
-                    <Route path='/profil' element={<Profil />}></Route>
+                    <Route 
+                        path='/profil' 
+                        element={
+                            <PrivateRoute>
+                                <Profil />
+                            </PrivateRoute>
+                        }>
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </Provider>    

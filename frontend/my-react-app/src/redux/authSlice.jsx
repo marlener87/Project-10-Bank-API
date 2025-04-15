@@ -20,8 +20,10 @@ const auth = createSlice({
             // On filtre les champs vides pour ne pas écraser les anciens
             // transforme l'objet en tableau de paires clé/valeur ; garde seulement les champs non vides ; reconstruit un objet propre
             const cleanPayload = Object.fromEntries(
-            Object.entries(action.payload).filter(([_, value]) => value !== "")
+                Object.entries(action.payload).filter(([key, value]) => value !== "")
             );
+
+            console.log(action.payload, cleanPayload)
             
             // Fusion propre : on garde les anciennes infos, sauf celles à mettre à jour
             state.user = { ...state.user, ...cleanPayload };

@@ -13,8 +13,8 @@ const Navigation = () => {
     const user = useSelector(state => state.auth.user); 
     //console.log(user);
     
-    const token = useSelector(state => state.auth.token);
-    console.log(token);
+    //const token = useSelector(state => state.auth.token);
+    //console.log(token);
     
 
     // Fonction de déconnection

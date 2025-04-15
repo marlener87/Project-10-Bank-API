@@ -16,7 +16,6 @@ const store = configureStore({
 const token = sessionStorage.getItem('token');
 
 if (token) {
-    store.dispatch(setToken(token)); // Mettre le token dans Redux
 
     axios.post(
         'http://localhost:3001/api/v1/user/profile', 
@@ -26,6 +25,7 @@ if (token) {
     .then(response => {
         if (response.status === 200) {
             store.dispatch(setUser(response.data.body)); // Charge l'utilisateur
+            store.dispatch(setToken(token)); // Mettre le token dans Redux
         }
     })
     .catch(error => {
